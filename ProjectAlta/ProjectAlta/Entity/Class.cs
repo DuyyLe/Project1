@@ -31,7 +31,6 @@ namespace ProjectAlta.Entity
 
         public ICollection<Class_Test> Class_Test { get; set; }
 
-        
         public ICollection<Student> Students { get; set; }
     }
 }

@@ -1,6 +1,11 @@
 using ProjectAlta;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ProjectAlta.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ProjectAltaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectAltaContext") ?? throw new InvalidOperationException("Connection string 'ProjectAltaContext' not found.")));
 
 // Add services to the container.
 

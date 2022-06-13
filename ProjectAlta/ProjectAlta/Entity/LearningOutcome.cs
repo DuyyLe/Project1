@@ -19,8 +19,6 @@ namespace ProjectAlta.Entity
 
         public bool? Status { get; set; }
 
-        
-
         public Student Student1 { get; set; }
 
         public Student_Test Student_Test1 { get; set; }
