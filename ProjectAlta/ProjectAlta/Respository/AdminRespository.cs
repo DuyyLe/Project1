@@ -5,41 +5,64 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProjectAlta.Data;
+
 using ProjectAlta.DBContext;
 using ProjectAlta.Entity;
 using ProjectAlta.Respository;
+using AutoMapper;
+using ProjectAlta.DTO;
 namespace ProjectAlta.Respository
 {
     public class AdminRespository : IEAdminRespository
     {
+        private readonly IMapper admap;
         private readonly Context con;
 
-
-        public AdminRespository(Context context)
+        
+        public AdminRespository(Context context,IMapper mapper)
         {
             con = context;
+            admap = mapper;
         }
 
-        public void Delete(int teacherId)
+        public bool Delete(string teacherId)
         {
-            Admin admin = con.Admins.Find(teacherId);
-            con.Admins.Remove(admin);
+            var DeleteAd = con.Admins.Find(teacherId);
+            if (DeleteAd == null)
+            {
+                return false;
+            }
+            con.Remove(DeleteAd);
+            return true;
         }
 
-        public List<Admin> GetAll()
+        public List<AdminDTO> GetAll()
         {
-            return con.Admins.ToList();
+           var allAd = con.Admins.ToList();
+            return admap.Map<List<AdminDTO>>(allAd);
+            
         }
 
-        public Admin GetById(int teacherId)
+        public AdminDTO GetById(string teacherId)
         {
-            return con.Admins.Find(teacherId);
+            var byid = con.Admins.Find(teacherId);
+            if(byid == null)
+            {
+                return null;
+            }
+                
+            return admap.Map<AdminDTO>(byid);
         }
 
-        public void Insert(Admin admin)
+        public  bool Insert(AdminDTO admin)
         {
-            con.Admins.Add(admin);
+            var insertAd = con.Admins.Find(admin.teacherId);
+            if(insertAd == null)
+            {
+                con.Admins.Add(admap.Map<Admin>(admin));
+                return true;
+            }
+            return false;
         }
 
         public void Save()
@@ -47,9 +70,58 @@ namespace ProjectAlta.Respository
             con.SaveChanges();
         }
 
-        public void Update(Admin admin)
+        public bool Update(AdminDTO admin)
         {
-            con.Entry(admin).State = EntityState.Modified;
+            var UpdateAd = con.Admins.Find(admin.teacherId);
+            if (UpdateAd != null)
+            {
+                con.Admins.Update(admap.Map(admin,UpdateAd));
+                return true;
+            }
+            return false;
         }
+
+        
+
+        //public void Delete(int teacherId)
+        //{
+        //    Admin admin = con.Admins.Find(teacherId);
+        //    con.Admins.Remove(admin);
+        //}
+
+        //public IEnumerable<Admin> GetAll()
+        //{
+        //    return con.Admins.ToList();
+        //}
+
+        //public Admin GetById(int teacherId)
+        //{
+        //    return con.Admins.Find(teacherId);
+        //}
+
+        //public Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Admin> Insert(Admin admin)
+        //{
+        //    return con.Admins.Add(admin);
+        //}
+
+        //public void Save()
+        //{
+        //    con.SaveChanges();
+        //}
+
+        //public void Update(Admin admin)
+        //{
+        //    con.Entry(admin).State = EntityState.Modified;
+        //}
+
+        //List<Admin> IEAdminRespository.GetAll()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //void IEAdminRespository.Insert(Admin admin)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

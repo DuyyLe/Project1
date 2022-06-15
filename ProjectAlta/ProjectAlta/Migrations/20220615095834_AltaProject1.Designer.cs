@@ -12,8 +12,8 @@ using ProjectAlta.DBContext;
 namespace ProjectAlta.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220605104636_ProjectAlta1")]
-    partial class ProjectAlta1
+    [Migration("20220615095834_AltaProject1")]
+    partial class AltaProject1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

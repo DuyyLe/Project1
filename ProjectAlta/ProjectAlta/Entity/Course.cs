@@ -13,6 +13,7 @@ namespace ProjectAlta.Entity
         public Course()
         {
             Class_Course = new HashSet<Class_Course>();
+            
         }
 
         public int courseId { get; set; }

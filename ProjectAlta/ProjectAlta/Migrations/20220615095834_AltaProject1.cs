@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectAlta.Migrations
 {
-    public partial class ProjectAlta1 : Migration
+    public partial class AltaProject1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

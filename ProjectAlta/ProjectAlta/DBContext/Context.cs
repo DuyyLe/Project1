@@ -6,7 +6,9 @@ namespace ProjectAlta.DBContext
     public class Context : DbContext
     {
         public Context(DbContextOptions options) : base(options)
+
         {
+             
         }
 
         public virtual DbSet<Admin> Admins { get; set; }
@@ -19,6 +21,8 @@ namespace ProjectAlta.DBContext
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<LearningOutcome> LearningOutcomes { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
+
+
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Student_Test> Student_Test { get; set; }
         public virtual DbSet<StudentAccount> StudentAccounts { get; set; }
@@ -110,6 +114,8 @@ namespace ProjectAlta.DBContext
                 .HasMany(e => e.Admins)
                 .WithOne(e => e.Position1)
                 .HasForeignKey(e => e.Position);
+
+
 
             modelBuilder.Entity<Student>()
                 .Property(e => e.studentId)

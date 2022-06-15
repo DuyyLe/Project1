@@ -9,6 +9,7 @@ namespace ProjectAlta.Entity
     [Table("Position")]
     public class Position
     {
+        
         public Position()
         {
             Admins = new HashSet<Admin>();

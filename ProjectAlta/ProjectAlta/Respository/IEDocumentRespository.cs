@@ -7,16 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using ProjectAlta.Entity;
-using ProjectAlta.DTO;
 namespace ProjectAlta.Respository
 {
-    public interface IEAdminRespository
+    public interface IEDocumentRespository
     {
-        List<AdminDTO> GetAll();
-        AdminDTO GetById(string teacherId);
-        bool Insert(AdminDTO admin);
-        bool Update(AdminDTO admin);
-        bool Delete(string teacherId);
+        List<Document> GetAll();
+        Document GetById(int docId);
+        void Insert(Document document);
+        void Update(Document document);
+        void Delete(int docId);
         void Save();
     }
 }

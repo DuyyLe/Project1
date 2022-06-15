@@ -9,6 +9,7 @@ namespace ProjectAlta.Entity
     [Table("Grade")]
     public class Grade
     {
+        
         public Grade()
         {
             Classes = new HashSet<Class>();
@@ -21,6 +22,7 @@ namespace ProjectAlta.Entity
 
         public bool? Status { get; set; }
 
+        
         public ICollection<Class> Classes { get; set; }
     }
 }

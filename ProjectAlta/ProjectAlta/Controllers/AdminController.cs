@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 using Microsoft.EntityFrameworkCore;
-using ProjectAlta.Data;
+
 using ProjectAlta.DBContext;
 using ProjectAlta.Entity;
 using ProjectAlta.Respository;
+using AutoMapper;
+using ProjectAlta.DTO;
 
 namespace ProjectAlta.Controllers
 {
@@ -19,29 +22,50 @@ namespace ProjectAlta.Controllers
     public class AdminController : ControllerBase
     {
         private IEAdminRespository _AdRespo;
-        public AdminController(Context context)
+        private IMapper admap;
+        public AdminController(IEAdminRespository adrespo, IMapper mapper)
         {
-            _AdRespo = new AdminRespository(context);
+            admap = mapper;
+            _AdRespo = adrespo;
+
         }
         [HttpGet]
-        public async Task<ActionResult<List<Admin>>> getAdmin()
+        public async Task<ActionResult<List<AdminDTO>>> getAdmin()
         {
             var model = _AdRespo.GetAll();
             if (model == null)
             {
-                return new List<Admin>();
+                return new List<AdminDTO>();
             }
             return model.ToList();
         }
-        [HttpPost]
-        public async void AddAdmin(Admin model)
-        {
-            if (ModelState.IsValid)
-            {
-                _AdRespo.Insert(model);
-                _AdRespo.Save();
 
-            }
+
+        [HttpPost]
+        public ActionResult<bool> AddAdmin(AdminDTO model)
+        {
+            var check = _AdRespo.Insert(model);
+            _AdRespo.Save();
+            return check;
+
+        }
+
+
+        [HttpPut]
+        public ActionResult<bool> UpdateAdmin(AdminDTO model)
+        {
+            var check = _AdRespo.Update(model);
+            _AdRespo.Save();
+            return check;
+
+        }
+        [HttpDelete("{id}")]
+        public ActionResult<bool> DeleteAdmin(string id)
+        {
+            var check = _AdRespo.Delete(id);
+            
+            _AdRespo.Save();
+            return check;
 
         }
     }
