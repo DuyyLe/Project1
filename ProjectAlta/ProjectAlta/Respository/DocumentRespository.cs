@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,37 +8,58 @@ using Microsoft.EntityFrameworkCore;
 using ProjectAlta.DBContext;
 using ProjectAlta.Entity;
 using ProjectAlta.Respository;
+using ProjectAlta.DTO;
 namespace ProjectAlta.Respository
 {
     public class DocumentRespository : IEDocumentRespository
     {
+        private readonly IMapper docmap;
         private readonly Context con;
 
 
-        public DocumentRespository(Context context)
+        public DocumentRespository(Context context,IMapper mapper)
         {
             con = context;
+            docmap = mapper;
         }
 
-        public void Delete(int docId)
+        public bool Delete(int docId)
         {
-            Document document = con.Documents.Find(docId);
-            con.Documents.Remove(document);
+            var DeleteDoc = con.Documents.Find(docId);
+            if (DeleteDoc == null)
+            {
+                return false;
+            }
+            con.Remove(DeleteDoc);
+            return true;
         }
 
-        public List<Document> GetAll()
+        public List<DocumentDTO> GetAll()
         {
-            return con.Documents.ToList();
+            var allDoc = con.Documents.ToList();
+            return docmap.Map<List<DocumentDTO>>(allDoc);
         }
 
-        public Document GetById(int docId)
+        public DocumentDTO GetById(int docId)
         {
-            return con.Documents.Find(docId);
+            var byid = con.Documents.Find(docId);
+            if (byid == null)
+            {
+                return null;
+            }
+
+            return docmap.Map<DocumentDTO>(byid);
         }
 
-        public void Insert(Document document)
+        public bool Insert(DocumentDTO document)
         {
-            con.Documents.Add(document);
+            var insertDoc = con.Documents.Find(document.docId);
+            if (insertDoc == null)
+            {
+                con.Documents.Add(docmap.Map<Document>(document));
+                return true;
+            }
+            return false;
         }
 
         public void Save()
@@ -45,9 +67,16 @@ namespace ProjectAlta.Respository
             con.SaveChanges();
         }
 
-        public void Update(Document document)
+        public bool Update(DocumentDTO document)
         {
-            con.Entry(document).State = EntityState.Modified;
+            var UpdateCourse = con.Documents.Find(document.docId);
+            if (UpdateCourse != null)
+            {
+                con.Documents.Update(docmap.Map(document, UpdateCourse));
+                return true;
+            }
+            return false;
         }
+
     }
 }

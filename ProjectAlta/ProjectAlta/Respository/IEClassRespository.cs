@@ -6,17 +6,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using ProjectAlta.Entity;
 using ProjectAlta.DTO;
+using ProjectAlta.Entity;
 namespace ProjectAlta.Respository
 {
-    public interface IEDocumentRespository
+    public interface IEClassRespository
     {
-        List<DocumentDTO> GetAll();
-        DocumentDTO GetById(int docId);
-        bool Insert(DocumentDTO document);
-        bool Update(DocumentDTO document);
-        bool Delete(int docId);
+        List<ClassDTO> GetAll();
+        ClassDTO GetById(string classId);
+        bool Insert(ClassDTO classes);
+        bool Update(ClassDTO classes);
+        bool Delete(string classId);
         void Save();
     }
 }

@@ -81,47 +81,5 @@ namespace ProjectAlta.Respository
             return false;
         }
 
-        
-
-        //public void Delete(int teacherId)
-        //{
-        //    Admin admin = con.Admins.Find(teacherId);
-        //    con.Admins.Remove(admin);
-        //}
-
-        //public IEnumerable<Admin> GetAll()
-        //{
-        //    return con.Admins.ToList();
-        //}
-
-        //public Admin GetById(int teacherId)
-        //{
-        //    return con.Admins.Find(teacherId);
-        //}
-
-        //public Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Admin> Insert(Admin admin)
-        //{
-        //    return con.Admins.Add(admin);
-        //}
-
-        //public void Save()
-        //{
-        //    con.SaveChanges();
-        //}
-
-        //public void Update(Admin admin)
-        //{
-        //    con.Entry(admin).State = EntityState.Modified;
-        //}
-
-        //List<Admin> IEAdminRespository.GetAll()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //void IEAdminRespository.Insert(Admin admin)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

@@ -10,13 +10,13 @@ using ProjectAlta.Entity;
 using ProjectAlta.DTO;
 namespace ProjectAlta.Respository
 {
-    public interface IEDocumentRespository
+    public interface IEGradeRespository
     {
-        List<DocumentDTO> GetAll();
-        DocumentDTO GetById(int docId);
-        bool Insert(DocumentDTO document);
-        bool Update(DocumentDTO document);
-        bool Delete(int docId);
+        List<GradeDTO> GetAll();
+        GradeDTO GetById(int gradeId);
+        bool Insert(GradeDTO grade);
+        bool Update(GradeDTO grade);
+        bool Delete(int gradeId);
         void Save();
     }
 }
