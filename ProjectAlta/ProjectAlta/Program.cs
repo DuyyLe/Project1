@@ -25,7 +25,14 @@ builder.Services.AddScoped<IEClassRespository, ClassRespository>();
 builder.Services.AddScoped<IEGradeRespository, GradeRespository>();
 builder.Services.AddScoped<IEClassCourseRespository, ClassCourseRespository>();
 builder.Services.AddScoped<IEPositionRespository, PositionRespository>();
-
+builder.Services.AddScoped<IEStudent, StudentRespository>();
+builder.Services.AddScoped<IEStudentAccount, StudentAccRespository>();
+builder.Services.AddScoped<IETestCate, TestCateRespository>();
+builder.Services.AddScoped<IETest, TestRespository>();
+builder.Services.AddScoped<IEClassTest, ClassTestRespository>();
+builder.Services.AddScoped<IESubject, SubjectRespository>();
+builder.Services.AddScoped<IEStudentTest, StudentTestRespository>();
+builder.Services.AddScoped<IELearningOutcome, LearningOutcomeRespository>();
 
 var app = builder.Build();
 

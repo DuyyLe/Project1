@@ -17,62 +17,58 @@ using ProjectAlta.Entity;
 using ProjectAlta.Respository;
 using AutoMapper;
 using ProjectAlta.DTO;
-
 namespace ProjectAlta.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PositionController : ControllerBase
+    public class SubjectController : ControllerBase
     {
-        private IEPositionRespository _PosRespo;
-        private IMapper admap;
-        public PositionController(IEPositionRespository posrespo, IMapper mapper)
+        private IESubject _subject;
+        private IMapper map;
+
+        public SubjectController(IESubject subject, IMapper mapper)
         {
-            admap = mapper;
-            _PosRespo = posrespo;
+            map = mapper;
+            _subject = subject;
         }
 
-
         [HttpGet]
-        public async Task<ActionResult<List<PositionDTO>>> getPos()
+        public async Task<ActionResult<List<SubjectDTO>>> getsub()
         {
-            var model = _PosRespo.GetAll();
+            var model = _subject.GetAll();
             if (model == null)
             {
-                return new List<PositionDTO>();
+                return new List<SubjectDTO>();
             }
             return model.ToList();
         }
 
-
         [HttpPost]
-        public ActionResult<bool> AddPos(PositionDTO model)
+        public ActionResult<bool> AddSub(SubjectDTO model)
         {
-            var check = _PosRespo.Insert(model);
-            _PosRespo.Save();
+            var check = _subject.Insert(model);
+            _subject.Save();
             return check;
 
         }
 
 
         [HttpPut]
-        public ActionResult<bool> UpdatePos(PositionDTO model)
+        public ActionResult<bool> UpdateTest(SubjectDTO model)
         {
-            var check = _PosRespo.Update(model);
-            _PosRespo.Save();
+            var check = _subject.Update(model);
+            _subject.Save();
             return check;
 
         }
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteGra(int id)
+        public ActionResult<bool> DeleteTest(int id)
         {
-            var check = _PosRespo.Delete(id);
+            var check = _subject.Delete(id);
 
-            _PosRespo.Save();
+            _subject.Save();
             return check;
 
         }
-        
-
     }
 }

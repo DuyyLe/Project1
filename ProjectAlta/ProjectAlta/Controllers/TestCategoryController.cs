@@ -22,57 +22,55 @@ namespace ProjectAlta.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PositionController : ControllerBase
+    public class TestCategoryController : ControllerBase
     {
-        private IEPositionRespository _PosRespo;
-        private IMapper admap;
-        public PositionController(IEPositionRespository posrespo, IMapper mapper)
+        private IETestCate _testcate;
+        private IMapper testcatemap;
+
+        public TestCategoryController(IETestCate testcate, IMapper mapper)
         {
-            admap = mapper;
-            _PosRespo = posrespo;
+            testcatemap = mapper;
+            _testcate = testcate;
         }
 
-
         [HttpGet]
-        public async Task<ActionResult<List<PositionDTO>>> getPos()
+        public async Task<ActionResult<List<TestCateDTO>>> gettestcate()
         {
-            var model = _PosRespo.GetAll();
+            var model = _testcate.GetAll();
             if (model == null)
             {
-                return new List<PositionDTO>();
+                return new List<TestCateDTO>();
             }
             return model.ToList();
         }
 
 
         [HttpPost]
-        public ActionResult<bool> AddPos(PositionDTO model)
+        public ActionResult<bool> AddAdmin(TestCateDTO model)
         {
-            var check = _PosRespo.Insert(model);
-            _PosRespo.Save();
+            var check = _testcate.Insert(model);
+            _testcate.Save();
             return check;
 
         }
 
 
         [HttpPut]
-        public ActionResult<bool> UpdatePos(PositionDTO model)
+        public ActionResult<bool> UpdateTestcate(TestCateDTO model)
         {
-            var check = _PosRespo.Update(model);
-            _PosRespo.Save();
+            var check = _testcate.Update(model);
+            _testcate.Save();
             return check;
 
         }
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteGra(int id)
+        public ActionResult<bool> DeleteTestcate(int id)
         {
-            var check = _PosRespo.Delete(id);
+            var check = _testcate.Delete(id);
 
-            _PosRespo.Save();
+            _testcate.Save();
             return check;
 
         }
-        
-
     }
 }

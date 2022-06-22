@@ -41,7 +41,7 @@ namespace ProjectAlta.Respository
 
         public AdminAccountDTO GetByUser(string userName)
         {
-            var byuser = con.Admins.Find(userName);
+            var byuser = con.AdminAccounts.Find(userName);
             if (byuser == null)
             {
                 return null;

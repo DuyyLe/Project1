@@ -24,6 +24,22 @@ namespace ProjectAlta.Mapper
             this.CreateMap<Class_Course, Class_CourseDTO>();
             this.CreateMap<PositionDTO, Position>();
             this.CreateMap<Position, PositionDTO>();
+            this.CreateMap<StudentDTO, Student>();
+            this.CreateMap<Student, StudentDTO>();
+            this.CreateMap<StudentAccountDTO, StudentAccount>();
+            this.CreateMap<StudentAccount, StudentAccountDTO>();
+            this.CreateMap<TestCateDTO, TestCategory>();
+            this.CreateMap<TestCategory, TestCateDTO>();
+            this.CreateMap<TestDTO, Test>();
+            this.CreateMap<Test, TestDTO>();
+            this.CreateMap<ClassTestDTO, Class_Test>();
+            this.CreateMap<Class_Test, ClassTestDTO>();
+            this.CreateMap<SubjectDTO, Subject>();
+            this.CreateMap<Subject, SubjectDTO>();
+            this.CreateMap<StudentTestDTO, Student_Test>();
+            this.CreateMap<Student_Test, StudentTestDTO>();
+            this.CreateMap<LearningOutcomeDTO, LearningOutcome>();
+            this.CreateMap<LearningOutcome, LearningOutcomeDTO>();
         }
             
     }
